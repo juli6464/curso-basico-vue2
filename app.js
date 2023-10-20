@@ -17,6 +17,12 @@ Vue.component('CoinDetail',{
           return this.value / this.coin.price
       }
   },
+  created () {
+    console.log('created coindetail...')
+  },
+  mounted() {
+    console.log('mounted coindetail...')
+  },
   methods:{
       toggleShowPrices(){
           this.showPrices =!this.showPrices
@@ -85,6 +91,12 @@ new Vue({
           
           color: 'f4f4f4'
       }
+  },
+  created () {
+    console.log('created...')
+  },
+  mounted() {
+    console.log('mounted...')
   },
   methods: {
     updateColor(color){
