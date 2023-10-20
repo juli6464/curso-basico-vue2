@@ -20,6 +20,9 @@ Vue.component('CoinDetail',{
   methods:{
       toggleShowPrices(){
           this.showPrices =!this.showPrices
+
+          this.$emit('change-color', 
+          this.showPrices ? 'FF96C8': '3D3D3D')
       }
   },
   template: `
@@ -37,18 +40,19 @@ Vue.component('CoinDetail',{
           <span @click="toggleShowPrices">
               {{showPrices ? '🙈' : '🐵'}}
           </span>
-          <input type="number" v-model="value">
-          <span>{{convertedValue}}</span>
-          <ul v-show="showPrices">
-              <li
-              class="uppercase"
-              :class="{orange: item.value == coin.price, red: item.value < coin.price, green: item.value > coin.price }"
-              v-for="(item, index) in coin.pricesWithDays"
-              :key="item.day">
-                  {{index}} - {{item.day}} - {{item.value}}
-              </li>
-          </ul>
-      </h2>
+
+      </h1>
+      <input type="number" v-model="value">
+      <span>{{convertedValue}}</span>
+      <ul v-show="showPrices">
+          <li
+          class="uppercase"
+          :class="{orange: item.value == coin.price, red: item.value < coin.price, green: item.value > coin.price }"
+          v-for="(item, index) in coin.pricesWithDays"
+          :key="item.day">
+              {{index}} - {{item.day}} - {{item.value}}
+          </li>
+      </ul>
   </div>
   `
 });
@@ -76,13 +80,11 @@ new Vue({
           
           color: 'f4f4f4'
       }
-  },/*
+  },
   methods: {
-      toggleShowPrices(){
-          this.showPrices = !this.showPrices;
-          this.color =this.color.split('')
+    updateColor(color){
+          this.color = color || this.color.split('')
           .reverse().join('');
       }
   },
-  */
 })
